@@ -6,7 +6,6 @@ use App\Enums\Accounting\InvoiceStatus;
 use App\Filament\Company\Resources\Sales\InvoiceResource;
 use App\Filament\Company\Resources\Sales\InvoiceResource\Widgets;
 use App\Filament\Company\Resources\Sales\RecurringInvoiceResource\Pages\ViewRecurringInvoice;
-use App\Models\Accounting\Invoice;
 use App\Models\Accounting\RecurringInvoice;
 use CodeWithDennis\SimpleAlert\Components\Infolists\SimpleAlert;
 use Filament\Actions;
@@ -110,15 +109,13 @@ class ListInvoices extends ListRecords
                 ->label('Unpaid')
                 ->modifyQueryUsing(function (Builder $query) {
                     $query->unpaid();
-                })
-                ->badge(Invoice::unpaid()->count()),
+                }),
 
             'draft' => Tab::make()
                 ->label('Draft')
                 ->modifyQueryUsing(function (Builder $query) {
                     $query->where('status', InvoiceStatus::Draft);
-                })
-                ->badge(Invoice::where('status', InvoiceStatus::Draft)->count()),
+                }),
         ];
     }
 }

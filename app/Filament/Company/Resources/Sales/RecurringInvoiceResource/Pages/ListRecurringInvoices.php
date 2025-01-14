@@ -4,7 +4,6 @@ namespace App\Filament\Company\Resources\Sales\RecurringInvoiceResource\Pages;
 
 use App\Enums\Accounting\RecurringInvoiceStatus;
 use App\Filament\Company\Resources\Sales\RecurringInvoiceResource;
-use App\Models\Accounting\RecurringInvoice;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
@@ -37,15 +36,13 @@ class ListRecurringInvoices extends ListRecords
                 ->label('Active')
                 ->modifyQueryUsing(function (Builder $query) {
                     $query->where('status', RecurringInvoiceStatus::Active);
-                })
-                ->badge(RecurringInvoice::where('status', RecurringInvoiceStatus::Active)->count()),
+                }),
 
             'draft' => Tab::make()
                 ->label('Draft')
                 ->modifyQueryUsing(function (Builder $query) {
                     $query->where('status', RecurringInvoiceStatus::Draft);
-                })
-                ->badge(RecurringInvoice::where('status', RecurringInvoiceStatus::Draft)->count()),
+                }),
         ];
     }
 }

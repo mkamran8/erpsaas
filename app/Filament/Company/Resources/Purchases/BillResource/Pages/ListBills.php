@@ -4,7 +4,6 @@ namespace App\Filament\Company\Resources\Purchases\BillResource\Pages;
 
 use App\Enums\Accounting\BillStatus;
 use App\Filament\Company\Resources\Purchases\BillResource;
-use App\Models\Accounting\Bill;
 use Filament\Actions;
 use Filament\Pages\Concerns\ExposesTableToWidgets;
 use Filament\Resources\Components\Tab;
@@ -47,15 +46,13 @@ class ListBills extends ListRecords
                 ->label('Outstanding')
                 ->modifyQueryUsing(function (Builder $query) {
                     $query->outstanding();
-                })
-                ->badge(Bill::outstanding()->count()),
+                }),
 
             'paid' => Tab::make()
                 ->label('Paid')
                 ->modifyQueryUsing(function (Builder $query) {
                     $query->where('status', BillStatus::Paid);
-                })
-                ->badge(Bill::where('status', BillStatus::Paid)->count()),
+                }),
         ];
     }
 }

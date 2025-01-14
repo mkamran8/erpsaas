@@ -283,7 +283,7 @@ class RecurringInvoice extends Document
         }
 
         $nextDate = match (true) {
-            $this->frequency->isDaily() => $lastDate->addDay(),
+            $this->frequency->isDaily() => $lastDate->copy()->addDay(),
 
             $this->frequency->isWeekly() => $this->calculateNextWeeklyDate($lastDate),
 

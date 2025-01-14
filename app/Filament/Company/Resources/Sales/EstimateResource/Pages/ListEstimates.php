@@ -5,7 +5,6 @@ namespace App\Filament\Company\Resources\Sales\EstimateResource\Pages;
 use App\Enums\Accounting\EstimateStatus;
 use App\Filament\Company\Resources\Sales\EstimateResource;
 use App\Filament\Company\Resources\Sales\EstimateResource\Widgets;
-use App\Models\Accounting\Estimate;
 use Filament\Actions;
 use Filament\Pages\Concerns\ExposesTableToWidgets;
 use Filament\Resources\Components\Tab;
@@ -48,15 +47,13 @@ class ListEstimates extends ListRecords
                 ->label('Active')
                 ->modifyQueryUsing(function (Builder $query) {
                     $query->active();
-                })
-                ->badge(Estimate::active()->count()),
+                }),
 
             'draft' => Tab::make()
                 ->label('Draft')
                 ->modifyQueryUsing(function (Builder $query) {
                     $query->where('status', EstimateStatus::Draft);
-                })
-                ->badge(Estimate::where('status', EstimateStatus::Draft)->count()),
+                }),
         ];
     }
 }
